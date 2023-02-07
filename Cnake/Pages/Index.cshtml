@@ -150,6 +150,10 @@
 
                 document.getElementById("scoreValue").innerHTML = score;
 
+                // Increase the length of the snake
+                let tail = { x: snake[snake.length - 1].x, y: snake[snake.length - 1].y };
+                snake.push(tail);
+
                 spawnApple();
             }
         }
@@ -158,6 +162,7 @@
         function startGame() {
             gameLoop = setInterval(moveSnake, slider.value *2 )
             spawnApple();
+            score = 0;
         }
 
         // Reset the game
@@ -169,6 +174,13 @@
             drawSnake();
             startGame();
         }
+
+        window.addEventListener("keydown", function (e) {
+            // space and arrow keys
+            if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+                e.preventDefault();
+            }
+        }, false);
 
         // Handle the reset button click event
         resetButton.addEventListener("click", resetGame);
