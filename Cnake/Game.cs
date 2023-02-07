@@ -24,37 +24,48 @@ namespace Cnake
 
         public void DrawApple(int x, int y)
         {
-            // Implementation to draw the apple
+            Console.WriteLine("Drawing apple at x: " + x + " y: " + y);
         }
 
         public void DrawSnake()
         {
-            // Implementation to draw the snake
+            Console.WriteLine("Drawing snake at current position");
         }
 
         public void SpawnApple()
         {
-            // Implementation to generate and spawn the apple
+            int[] apple = new int[] { new Random().Next(10), new Random().Next(10) };
+            Console.WriteLine("Spawning apple at x: " + apple[0] + " y: " + apple[1]);
+            DrawApple(apple[0], apple[1]);
         }
 
         public void MoveSnake()
         {
-            // Implementation to move the snake
+            Console.WriteLine("Moving snake to next position");
         }
 
         public void SnakeEatsApple(int[] head, int[] apple)
         {
-            // Implementation to handle when the snake eats the apple
+            if (head[0] == apple[0] && head[1] == apple[1])
+            {
+                Console.WriteLine("Snake ate the apple!");
+            }
+
+            SpawnApple();
         }
 
         public void StartGame()
         {
-            // Implementation to start the game
+            Console.WriteLine("Starting game...");
+            SpawnApple();
+            DrawSnake();
+            Console.WriteLine("Game started!");
         }
 
         public void ResetGame()
         {
-            // Implementation to reset the game
+            Console.WriteLine("Resetting game...");
+            Console.WriteLine("Game reset!");
         }
     }
 }

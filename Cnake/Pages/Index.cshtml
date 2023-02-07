@@ -21,6 +21,13 @@
             position: absolute;
             background-color: green;
         }
+
+        .apple-block {
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            background-color: red;
+        }
     </style>
 </head>
 <body>
@@ -28,14 +35,15 @@
     <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
     <p>Value: <span id="value"></span></p>
     <b></b>
-
+    <button id="start-button">Start</button>
+    <b></b>
     <p id="score">Score: <span id="scoreValue">0</span></p>
     <div id="game-board"></div>
     <button id="reset-button">Reset</button>
     <script>
         const gameBoard = document.getElementById("game-board");
-
         const resetButton = document.getElementById("reset-button");
+        const startButton = document.getElementById("start-button");
 
         let snake = [{ x: 250, y: 250 }];
 
@@ -60,12 +68,9 @@
         // Draw a square representing the apple
         function drawApple(x, y) {
           let square = document.createElement("div");
+          square.classList.add("apple-block");
               square.style.left = `${x}px`;
               square.style.top = `${y}px`;
-              square.style.width = "10px";
-              square.style.height = "10px";
-              square.style.position = "absolute";
-              square.style.backgroundColor = "red";
               gameBoard.appendChild(square);
         }
 
@@ -160,6 +165,7 @@
 
         // Start the game
         function startGame() {
+            resetGame();
             gameLoop = setInterval(moveSnake, slider.value *2 )
             spawnApple();
             score = 0;
@@ -172,7 +178,6 @@
             direction = "right";
             appleDrawn = false;
             drawSnake();
-            startGame();
         }
 
         window.addEventListener("keydown", function (e) {
@@ -184,6 +189,9 @@
 
         // Handle the reset button click event
         resetButton.addEventListener("click", resetGame);
+
+        // Handle the reset button click event
+        startButton.addEventListener("click", startGame);
 
         // Handle the arrow key press events
         document.onkeydown = function (event) {
@@ -202,8 +210,6 @@
                     break;
             }
         };
-
-        startGame();
     </script>
 </body>
 </html>
